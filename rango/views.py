@@ -3,9 +3,11 @@ from django.http import HttpResponse
 from django.urls import reverse
 
 def index(request):
-    about_url = reverse('rango:about')
-    return HttpResponse(f"Rango says hey there partner! <a href='{about_url}'>About</a>")
+    context_dict = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!',
+                    'about_url': reverse('rango:about')}
+    return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
-    index_url = reverse('rango:index')
-    return HttpResponse(f"Rango says here is the about page. <a href='{index_url}'>Index</a>")
+    context_dict = {'boldmessage': 'This tutorial has been put together by me!',
+                    'index_url': reverse('rango:index')}
+    return render(request, 'rango/about.html', context=context_dict)
