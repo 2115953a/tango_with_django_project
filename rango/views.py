@@ -18,15 +18,16 @@ def index(request):
 
     # Cookies Here
     visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
 
     response = render(request, 'rango/index.html', context=context_dict)
     return response
 
 
 def about(request):
+    visitor_cookie_handler(request)
     context_dict = {'boldmessage': 'This tutorial has been put together by me!',
-                    'index_url': reverse('rango:index')}
+                    'index_url': reverse('rango:index'),
+                    'visits': request.session['visits']}
 
     return render(request, 'rango/about.html', context=context_dict)
 
